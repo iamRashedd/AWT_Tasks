@@ -29,5 +29,8 @@ Route::get('/products/service',[ProductController::class,'showProducts'])->name(
 Route::get('/contact',[ProductController::class,'contact'])->name("contact");
 Route::get('/about',[ProductController::class,'about'])->name("about");
 Route::get('/teams',[ProductController::class,'teams'])->name("teams");
+Route::get('/login',[LoginController::class,'login'])->name("name");
+Route::get('/registration',[LoginController::class,'registration'])->name("registration");
+Route::post('/registration',[LoginController::class,'registered'])->name("registered");
 
 
