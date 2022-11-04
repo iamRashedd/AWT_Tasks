@@ -7,7 +7,7 @@
 <body>
 
     <div class="conatiner">
-        <h1>Welcome to the Shop</h1>
+        
         @include('includes.topnav')
     </div>
     <div>

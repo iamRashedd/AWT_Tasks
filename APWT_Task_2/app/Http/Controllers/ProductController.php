@@ -16,6 +16,18 @@ class product{
     }
 }
 
+class comment{
+    public $name;
+    public $email;
+    public $message;
+
+    function __construct($name,$email,$message){
+        $this->name = $name;
+        $this->email = $email;
+        $this->message = $message;
+    }
+}
+
 class ProductController extends Controller
 {
     //
@@ -36,6 +48,21 @@ class ProductController extends Controller
 
     public function contact(){
         return view('contact');
+    }
+    public function contacted(Request $request){
+        $validate = $request->validate(
+            [
+                'name' => 'required|min:5|string',
+                'email' => 'required|string|',
+                'message' => 'required|max:100'
+            ]
+            );
+    
+            $comment = new comment($request->name,$request->email,$request->message);
+            
+            
+            echo "<pre>";
+            print_r($comment);
     }
 
     public function about(){

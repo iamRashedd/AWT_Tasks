@@ -1,43 +1,120 @@
 @extends('layouts.app')
 @section('content')
     <div>
-        <h1>Registration</h1>
+        <h1 align="center">Registration</h1>
     </div>
-    <form action="/registered" method="post">
+    <form action="{{route('registration')}}"  method="post">
         {{csrf_field()}}
+<!--
+        <div calss="form-group row">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        </div>
+-->        
+            
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-right"> Name: </label>
+            <div class="col-sm-3">
+            <input type="text" name="name" class="form-control" value="{{old('name')}}">
+            @error('name')
+            <span class="text-danger">
+                {{ $message }}
+            </span>
+            @enderror
+            <br>
+            </div>
+        </div>
 
-        Name: <input type="text name="name" value="{{old('name')}}">
-        @if ($errors->has('name'))
-        <span class="">
-            <strong>
-                {{ $errors->first('name')}}
-            </strong>
-        </span>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"> Email: </label>
+            <div class="col-sm-3">
+                <input type="text" name="email" class="form-control" value="{{old('email')}}">
+                @error('email')
+                <span class="text-danger">
+                    {{ $message }}
+                </span>
+                @enderror
+                <br>
+            </div>
+        </div>
 
-        Email: <input type="text" name="email" value="{{old('email')}}">
-        @if  ($errors->has('email'))
-        <span class="">
-            <strong>{{ $errors->first('email') }}</strong>
-        </span>
-
-        Age: <input type="number" name="age" value="{{old('age')}}">
-        @if  ($errors->has('age'))
-        <span class="">
-            <strong>{{ $errors->first('age') }}</strong>
-        </span>
-
-        Address: <input type="text" name="address" value="{{old('address')}}">
-        @if  ($errors->has('address'))
-        <span class="">
-            <strong>{{ $errors->first('address') }}</strong>
-        </span>
         
-        New Password: <input type="password" name="password" value="">
-        Confirm Password: <input type="password" name="confirmPassword" value="">
-        @if  ($errors->has('password'))
-        <span class="">
-            <strong>{{ $errors->first('password') }}</strong>
-        </span>
-        
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"> Date of Birth: </label> 
+            <div class="col-sm-3">
+                <input type="date" name="dob" class="form-control" value="{{old('dob')}}">
+
+                @error('dob')
+                <span class="text-danger">
+                    {{ $message }}
+                </span>
+                @enderror
+            </div>
+        </div>
+        <br>
+
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"> Account Type: </label> 
+            <div class="col-sm-3">
+                
+                <select name="type" class="form-control" value="{{old('type')}}">
+                    <option value="none">None</option>
+                    <option value="buyer">Buyer</option>
+                    <option value="seller">Seller</option>
+                </select>
+
+                @error('type')
+                <span class="text-danger">
+                    {{ $message }}
+                </span>
+                @enderror
+            </div>
+        </div>
+        <br>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"> Address: </label>
+            <div class="col-sm-3">
+                <input type="text" name="address" class="form-control" value="{{old('address')}}">
+                @error('address')
+                <span class="text-danger">
+                    {{ $errors->first('address') }}
+                </span>
+                @enderror
+            </div>
+        </div>
+        <br>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"> New Password: </label>
+            <div class="col-sm-3">
+                <input type="password" name="password" class="form-control" value="">
+                @error('password')
+                <span class="text-danger">
+                    {{ $message }}
+                </span>
+                @enderror
+            </div>
+        </div>
+        <br>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"> Confirm Password: </label>
+            <div class="col-sm-3">
+                <input type="password" name="confirmPassword" class="form-control" value="">
+            </div>
+        </div>
+        <br>
+        <div class="col-auto">
+        <input type="submit" name="submit" class="btn btn-success" value="Submit">
+        </div>
     </form>
 @endsection
