@@ -23,10 +23,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/sellerlogin', [SellerAPIController::class, 'APILogin']);
 Route::post('/sellerlogout', [SellerAPIController::class, 'APILogout']);
 Route::post('/sellerregister', [SellerAPIController::class, 'APIRegister']);
-Route::get('/sellerorders', [SellerAPIController::class, 'APIOrders']);
+Route::get('/sellerorders/{id}', [SellerAPIController::class, 'APIOrders']);
 Route::get('/sellerorderdetails/{id}', [SellerAPIController::class, 'APIOrderDetails']);
-Route::get('/sellerprofile/{id}', [SellerAPIController::class, 'APIProfile'])
-;
+Route::get('/sellerprofile/{id}', [SellerAPIController::class, 'APIProfile']);
+
+Route::get('/sellerbids/{id}', [SellerAPIController::class, 'APIBids']);
+Route::get('/sellerdashboard/{id}', [SellerAPIController::class, 'APIDashboard']);
+
 Route::get('/sendmail', [SellerEmailController::class, 'showMail']);
 Route::get('/orderhistoryinvoice', [SellerEmailController::class, 'historyMail']);
 

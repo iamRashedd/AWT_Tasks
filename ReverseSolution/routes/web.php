@@ -15,8 +15,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 
-[App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/sellerregistration', [SellerController::class, 'register'])->name('seller.registration');
 Route::post('/sellerregistration', [SellerController::class, 'registered'])->name('seller.registration');
 Route::get('/sellerlogin', [SellerController::class, 'login'])->name('seller.login');

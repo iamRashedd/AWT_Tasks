@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Seller;
 use App\Models\Bid;
+use App\Models\Order;
 use App\Models\Post;
 use App\Models\Token;
 use Illuminate\Http\Request;
@@ -98,11 +99,11 @@ class SellerAPIController extends Controller
         }
     }
 
-    public function APIOrders()
+    public function APIOrders($id)
     {   
         $email = session()->get('user');
-        $seller = Seller::where('email',$email)->first();
-        $orders = Bid::where('seller_id',$seller->id)->get();
+        $seller = Seller::where('id',$id)->first();
+        $orders = Order::where('seller_id',$seller->id)->get();
         //echo "<pre>";
         //print_r($orders);
         return $orders;
@@ -112,6 +113,26 @@ class SellerAPIController extends Controller
         $seller = Seller::where('id',$id)->first();
 
         return $seller;
+    }
+
+    public function APIBids($id)
+    {   
+        
+        $bids = Bid::where('seller_id',$id)->get();
+        return $bids;
+    }
+
+    public function APIDashboard($id)
+    {
+        $seller = Seller::where('id',$id)->first();
+        $bids = Bid::where('seller_id',$seller->id)->get();
+        $orders = Order::where('seller_id',$seller->id)->get();
+        $posts = Post::all();
+        $total = count($orders);
+        $total2 = count($posts);
+        $total3 = count($bids);
+        $data = ["orders"=> $total ,"posts"=>$total2, "bids" => $total3 ];
+        return response()->json($data);
     }
 
     
